@@ -23,7 +23,4 @@ class Solution:
                 if nodeList[i] >= nodeList[i+1]:
                     return False
             return True
-
-        tof = is_valid_bst()
-        
-        return tof
+        return is_valid_bst()
