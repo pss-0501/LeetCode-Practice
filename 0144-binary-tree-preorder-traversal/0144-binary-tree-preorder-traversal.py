@@ -10,8 +10,6 @@ class Solution:
             return None
         res = []
         def DFS(node):
-            # if node is None:
-            #     return
             res.append(node.val)
             if node.left is not None:
                 DFS(node.left)
