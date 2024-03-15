@@ -20,7 +20,7 @@ class Solution:
             right = right.right
 
         if l_h == r_h:
-            return (1 << l_h) - 1
+            return (2 ** l_h) - 1
         
         return 1 + self.countNodes(root.left) + self.countNodes(root.right)
 
