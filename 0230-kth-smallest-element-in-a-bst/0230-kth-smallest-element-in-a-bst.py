@@ -8,7 +8,7 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         self.res = []
 
-        def DFS(node):
+        def DFS(node):  #inorder
             if node is None:
                 return
             DFS(node.left)
