@@ -18,7 +18,7 @@ class Solution:
                     self.res.append(node.val)
                 # First go right, then left, ensuring we see rightmost nodes first.
                 dfs(node.right, level + 1)
-                #dfs(node.left, level + 1)
+                dfs(node.left, level + 1)
                 
         dfs(root, 0)
         return self.res    
