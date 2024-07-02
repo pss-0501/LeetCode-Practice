@@ -1,20 +1,16 @@
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        nums1.sort()
-        nums2.sort()
-        ans=[]
+        res = []
+        if len(nums1) > len(nums2):
+            for i in range(len(nums1)-1):
+                if nums1[i] in nums2 and nums1[i] not in res:
+                    res.append(nums1[i])
 
-        for i in nums1:
-            start = 0
-            end = len(nums2)-1
-            while start <= end:
-                mid = (start + end)//2
-                if nums2[mid] == i and nums2[mid] not in ans:
-                    ans.append(nums2[mid])
-                    break
-                elif i<nums2[mid]:
-                    end = mid - 1
-                else:
-                    start = mid + 1
-        return ans
+        else:
+            for i in range(len(nums2)-1):
+                if nums2[i] in nums1 and nums2[i] not in res:
+                    res.append(nums2[i])
+
+        return res
+
 
