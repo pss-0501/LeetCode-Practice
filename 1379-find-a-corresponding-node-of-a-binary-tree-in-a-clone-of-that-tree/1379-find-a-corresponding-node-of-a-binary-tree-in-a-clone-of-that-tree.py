@@ -7,6 +7,7 @@
 
 class Solution:
     def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+      
         if not original or target == original:
             return cloned
 
