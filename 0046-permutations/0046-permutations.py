@@ -1,17 +1,18 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        result = []
+        ans = []
 
-        #base class
-        if len(nums) == 1:
-            return [nums.copy()]
+        def backtrack(per):
+            if len(per) == len(nums):
+                ans.append(per.copy())
+                return
+            
+            for i in range(len(nums)):
+                if nums[i] in per:
+                    continue
+                per.append(nums[i])
+                backtrack(per)
+                per.pop()
 
-        for i in range(len(nums)):
-            n = nums.pop(0)
-            perms = self.permute(nums)
-
-            for perm in perms:
-                perm.append(n)
-            result.extend(perms)
-            nums.append(n)
-        return result
+        backtrack([])
+        return ans
