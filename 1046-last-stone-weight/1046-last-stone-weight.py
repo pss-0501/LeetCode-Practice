@@ -5,7 +5,8 @@ class Solution:
             y = stones.pop()
             x = stones.pop()
             if y == x:
-                x = y = 0
+                stones.append(0)
+                stones.sort()
             if x != y and x < y:
                 a = y - x
                 stones.append(a)
