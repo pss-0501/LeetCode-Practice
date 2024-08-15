@@ -12,7 +12,11 @@ class Solution:
             if i == 20 and change.count(5) >= 1 and (change.count(5) >= 3 or change.count(10) >= 1):
                 if change.count(10) >= 1: 
                     change.remove(10)
-                change.remove(5)
+                    change.remove(5)
+                else:
+                    change.remove(5)
+                    change.remove(5)
+                    change.remove(5)
                 change.append(20)
                 continue
             else:
