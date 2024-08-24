@@ -14,16 +14,25 @@ class Solution:
             if not found_duplicate:
                 return nums[i]
 
-        # Better Solution
-        mydict = {}
-        for i in range(len(nums)):
-            if nums[i] in mydict:
-                mydict[nums[i]] += 1
-            else:
-                mydict[nums[i]] = 1
+        # # Better Solution
+        # mydict = {}
+        # for i in range(len(nums)):
+        #     if nums[i] in mydict:
+        #         mydict[nums[i]] += 1
+        #     else:
+        #         mydict[nums[i]] = 1
 
-        for key, value in mydict.items():
-            if value == 1:
-                return key
+        # for key, value in mydict.items():
+        #     if value == 1:
+        #         return key
 
-        return 0
+        # return 0
+
+        # Optimise Solution
+
+        # XOR = ^;  a^a = 0
+        xor = 0
+        for i in nums:
+            xor ^= i
+
+        return xor
