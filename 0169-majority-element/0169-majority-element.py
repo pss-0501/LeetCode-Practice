@@ -1,5 +1,6 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
+        # Better Approach
         count = {}
         n = len(nums) - 1
         m = n/2
@@ -14,3 +15,16 @@ class Solution:
                 return key
 
         return -1
+
+        # Optimal Approach
+        el = 0
+        count = 0
+        for i in nums:
+            if count == 0:
+                el = i
+            if el == i:
+                count += 1
+            elif i != el:
+                count -= 1
+        
+        return el
