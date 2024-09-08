@@ -1,36 +1,26 @@
-class Solution:
-    def longestConsecutive(self, nums: List[int]) -> int:
-        # Better Solution
-        nums.sort()
-        longt = 0
-        count = 0
-        prev = lastSmaller = float('-inf')
+class Solution(object):
+    def longestConsecutive(self, nums):
+        if len(nums) == 0:
+            return 0
+        elif len(nums) == 1:
+            return 1
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        num_set = set(nums)
+        max_length = 0
 
-        for i in range(len(nums)):
-            if nums[i] - 1 == prev:
-                prev = nums[i]
-                count += 1
-            elif nums[i] != prev:
-                count = 1
-                prev = nums[i]
-            longt = max(count, longt)
-        return longt
+        for num in num_set:
+            if num - 1 not in num_set:
+                current_num = num
+                current_length = 1
 
+                while current_num + 1 in num_set:
+                    current_num += 1
+                    current_length += 1
 
-        # Brute Solution
-    #     longt = 0
-    #     n = len(nums)
-    #     for i in range(n):
-    #         count = 1
-    #         targ = nums[i]
-    #         while(self.ls(nums, targ + 1) == True):
-    #             count += 1
-    #             targ += 1
-    #         longt = max(longt, count)
-    #     return longt
+                max_length = max(max_length, current_length)
 
-    # def ls(self, nums, target):
-    #     for i in range(len(nums)):
-    #         if nums[i] == target:
-    #             return True
-    #     return False
+        return max_length
+        
