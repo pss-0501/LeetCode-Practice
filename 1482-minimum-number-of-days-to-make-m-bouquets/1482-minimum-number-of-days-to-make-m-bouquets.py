@@ -1,31 +1,31 @@
 class Solution:
     def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
-        if len(bloomDay) < (m * k):
-            return -1
-        
-        def canMakeBouquets(day):
-            flower = 0
-            Bouquets = 0
-
-            for b in bloomDay:
-                if b <= day:
-                    flower += 1
-                    if flower == k:
-                        Bouquets += 1
-                        flower = 0
+        def CountDays(arr, i):
+            bou = 0
+            count = 0
+            for a in arr:
+                if a <= i:
+                    count += 1
+                    if count == k:
+                        bou += 1
+                        count = 0
                 else:
-                    flower = 0
-            if Bouquets >= m:
-                    return True  # We can make the required number of bouquets
-            return False
+                    count = 0
 
-        # Step 2: Binary search on result
-        left, right = 1, max(bloomDay)
-        while left < right:
-            mid = (left + right) // 2
-            if canMakeBouquets(mid):
-                right = mid
+            return bou
+
+        if len(bloomDay) < m * k:
+            return -1
+
+        low = 1
+        high = max(bloomDay)
+        ans = -1
+        while low <= high:
+            mid = (low + high) // 2
+            BouReady = CountDays(bloomDay, mid)
+            if BouReady >= m:
+                ans = mid
+                high = mid - 1
             else:
-                left = mid + 1
-        
-        return left if canMakeBouquets(left) else -1
+                low = mid + 1
+        return ans
