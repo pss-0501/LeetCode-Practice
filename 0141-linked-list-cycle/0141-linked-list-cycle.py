@@ -1,17 +1,22 @@
 # Definition for singly-linked list.
-# class ListNode:
+# class ListNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
 
-class Solution:
-    def hasCycle(self, head: Optional[ListNode]) -> bool:
-        # Brute Force
-        visited = set()
-        curr = head
-        while curr:
-            if curr in visited:  # Checking if we've seen this node before
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        fast = head
+        slow = head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            if fast == slow:
                 return True
-            visited.add(curr)  # Add current node to visited set
-            curr = curr.next  # Move to the next node
         return False
+        
+        
