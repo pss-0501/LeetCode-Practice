@@ -1,34 +1,19 @@
 class Solution:
     def sumSubarrayMins(self, arr: List[int]) -> int:
-        mod = 10 ** 9 + 7
+        MOD = 10**9 + 7
+        stack = []
+        res = 0
         n = len(arr)
-    
-        # Arrays to store the count of subarrays for which arr[i] is the minimum
-        left = [0] * n
-        right = [0] * n
 
-        # Monotonic stack to find previous less element
-        stack = []
-        for i in range(n):
-            # Calculate left[i]
-            count = 1
-            while stack and stack[-1][0] > arr[i]:
-                count += stack.pop()[1]
+        for i in range(n + 1):
+            # Process each element in the array
+            while stack and (i == n or arr[stack[-1]] > arr[i]):
+                j = stack.pop()
+                left = j - (stack[-1] if stack else -1)
+                right = i - j
+                res += arr[j] * left * right
+                res %= MOD  # Take modulo to prevent overflow
+            stack.append(i)
 
-            left[i] = count
-            stack.append((arr[i], count))
 
-        stack = []
-        for i in range(n - 1, -1, -1):
-            # Calculate right[i]
-            count = 1
-            while stack and stack[-1][0] >= arr[i]:
-                count += stack.pop()[1]
-            right[i] = count
-            stack.append((arr[i], count))
-
-        result = 0
-        for i in range(n):
-            result = (result + arr[i] * left[i] * right[i]) % mod
-
-        return result
+        return res
