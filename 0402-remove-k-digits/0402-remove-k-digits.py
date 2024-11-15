@@ -10,6 +10,12 @@ class Solution:
 
 
             stack.append(i)
+
+        # stack = stack[:-k] if k > 0 else stack
+        while k > 0:
+            stack.pop()
+            k -= 1
+
         res = ''.join(stack).lstrip('0')
 
         return res if res else "0"
