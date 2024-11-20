@@ -5,7 +5,6 @@ class Solution:
             if stack and ((i == 'B' and stack[-1] == 'A') or (i == 'D' and stack[-1] == 'C')) :
                 stack.pop()
                 continue
-            print(stack)
             
             stack.append(i)
 
