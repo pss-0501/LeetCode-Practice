@@ -1,24 +1,18 @@
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        
-        stack = []
-        maxsum = counter = 0
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        start = 0
+        maxLength = 0
+        res = set()
 
-        for i in s:
-            if i not in stack:
-                stack.append(i)
-                counter += 1
-            else:
-                counter = 0
-                while stack:
-                    stack.pop()
-            maxsum = max(counter, maxsum)
+        for end in range(len(s)):
+            while s[end] in res:
+                res.remove(s[start])
+                start += 1
 
-        return maxsum
+            res.add(s[end])
+            maxLength = max(maxLength, end - start + 1)
+
+        return maxLength
+
+
             
-
-        
