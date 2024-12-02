@@ -1,20 +1,19 @@
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
-        count = 0
-        odd_count = 0
-        prefix_sum = defaultdict(int)
-        prefix_sum[0] = 1
+        def count(k):
+            if k < 0:
+                return 0
+            left = 0
+            res = 0
+            count = 0
+            n = len(nums)
 
-        for num in nums:
-            # Increment odd_count if the number is odd
-            if num % 2 == 1:
-                odd_count += 1
-            
-            # Check if there is a prefix sum that would result in k odd numbers
-            if odd_count - k in prefix_sum:
-                count += prefix_sum[odd_count - k]
-            
-            # Update the prefix sums with the current odd_count
-            prefix_sum[odd_count] += 1
-    
-        return count
+            for right in range(n):
+                res += nums[right] % 2
+                while res > k:
+                    res -= nums[left] % 2
+                    left += 1
+
+                count = count + (right - left + 1)
+            return count
+        return count(k) - count(k - 1)
