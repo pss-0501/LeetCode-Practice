@@ -2,16 +2,24 @@ class Solution:
     def decrypt(self, code: List[int], k: int) -> List[int]:
         n = len(code)
         res = [0] * n
+        left = 0
+        curr_sum = 0
 
-        if k == 0:
-            return res
+        # if k == 0:
+        #     return res
 
-        for i in range(n):
-            if k > 0:
-                for j in range(i + 1, i + 1 + k):
-                    res[i] += code[j % n]
+        for right in range(n + abs(k)):
+            curr_sum += code[right % n]
 
-            elif k < 0:
-                for j in range(i - 1, i - 1 - abs(k), -1):
-                    res[i] += code[j % n]
+            if right - left + 1 > abs(k):
+                curr_sum -= code[left % n]
+                left = (left + 1) % n
+
+            if right - left + 1 == abs(k):
+                if k > 0:
+                    res[(left - 1) % n] = curr_sum 
+
+                elif k < 0:
+                    res[(right + 1) % n] = curr_sum
+
         return res
