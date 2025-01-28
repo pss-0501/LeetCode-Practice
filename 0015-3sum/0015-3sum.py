@@ -1,37 +1,31 @@
-class Solution(object):
-    def threeSum(self, nums):
-        
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
         target = 0
-        #my_list = []
-        final_list = []
-        n = len(nums)
+        final = []
 
+        n = len(nums)
         nums.sort()
 
         i = 0
-
         for i in range(n):
-
-            left =  i + 1
-            #center = 1
+            left = i + 1
             right = n - 1
-            
+
             while left < right:
-                sum = nums[i] + nums[left] + nums[right]
-
-                if(sum < target):
+                sum1 = nums[i] + nums[left] + nums[right]
+                if sum1 < target:
                     left += 1
-
-                elif(sum == target and i != left != right):          # and i != left != right
-                    #my_list.append([nums[i], nums[left], nums[right]])
-
-                    if([nums[i], nums[left], nums[right]] not in final_list):
-                        final_list.append([nums[i], nums[left], nums[right]])
-                    
-                    left += 1
-                    right -= 1                   
                 
+                elif sum1 == target and i != left != right:
+
+                    if ([nums[i], nums[left], nums[right]]) not in final:
+                        final.append([nums[i], nums[left], nums[right]])
+
+                    left += 1
+                    right -= 1
+
                 else:
                     right -= 1
 
-        return final_list
+        return final
+
