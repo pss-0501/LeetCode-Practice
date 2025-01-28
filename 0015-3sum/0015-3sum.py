@@ -17,16 +17,14 @@ class Solution:
                 sum1 = nums[i] + nums[left] + nums[right]
                 if sum1 < target:
                     left += 1
-                
-                elif sum1 == target and i != left != right:
 
-                    if ([nums[i], nums[left], nums[right]]) not in final:
-                        final.append([nums[i], nums[left], nums[right]])
+                elif sum1 > target:
+                    right -= 1
+                
+                else :
+                    final.append([nums[i], nums[left], nums[right]])
 
                     left += 1
-                    right -= 1
-
-                else:
                     right -= 1
 
         return final
