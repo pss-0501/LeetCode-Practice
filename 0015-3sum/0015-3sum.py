@@ -8,6 +8,8 @@ class Solution:
 
         i = 0
         for i in range(n):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
             left = i + 1
             right = n - 1
 
