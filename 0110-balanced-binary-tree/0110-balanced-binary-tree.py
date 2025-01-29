@@ -5,16 +5,45 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+    # Brute Force On^2
+    # def isBalanced(self, root: Optional[TreeNode]) -> bool:
+    #     if not root:
+    #         return True
 
-        def dfs(root):
-            if root is None:
-                return [True, 0]
+    #     left_height = self.height(root.left)
+    #     right_height = self.height(root.right)
 
-            left, right = dfs(root.left), dfs(root.right)
-            balanced = left[0] and right[0] and abs(left[1] - right[1]) <= 1
+    #     if abs(left_height - right_height) > 1:
+    #         return False
 
-            return [balanced, 1 + max(left[1], right[1])]
+    #     return self.isBalanced(root.left) and self.isBalanced(root.right)
 
-        return dfs(root)[0]
+    # def height(self, root):
+    #     if not root:
+    #         return 0
         
+    #     left_height = self.height(root.left)
+    #     right_height = self.height(root.right)
+
+    #     return max(left_height, right_height) + 1
+
+    # Optimise
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        return self.height(root) != -1
+
+    def height(self, node):
+        if not node:
+            return 0
+
+        left_height = self.height(node.left)
+        if left_height == -1:
+            return -1  # Left subtree is unbalanced
+
+        right_height = self.height(node.right)
+        if right_height == -1:
+            return -1  # Right subtree is unbalanced
+
+        if abs(left_height - right_height) > 1:
+            return -1  # Current tree is unbalanced
+
+        return max(left_height, right_height) + 1
