@@ -12,9 +12,9 @@ class Solution:
         queue = deque()
         queue.append(root)
         res = []
+        left = True
         
         while queue:
-            rev = 0
             level = []
             for _ in range(len(queue)):
                 node = queue.popleft()
@@ -26,10 +26,11 @@ class Solution:
                 if node.right:
                     queue.append(node.right)
 
-            if len(res) % 2 != 0:
+            if not left:
                 level.reverse()
 
             res.append(level)
+            left = not left
 
         return res
 
