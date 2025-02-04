@@ -8,17 +8,15 @@ class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
             return []
+
         self.res = []
-        
-        def dfs(node, level):
-            if node:
-                if level == len(self.res):
-                    # We only add the first node we encounter at each level,
-                    # which, due to our traversal, will be the rightmost node.
-                    self.res.append(node.val)
-                # First go right, then left, ensuring we see rightmost nodes first.
-                dfs(node.right, level + 1)
-                dfs(node.left, level + 1)
-                
-        dfs(root, 0)
-        return self.res    
+        self.dfs(root, 0)
+        return self.res
+
+    def dfs(self, node, level):
+        if node:
+            if level == len(self.res):
+                self.res.append(node.val)
+
+            self.dfs(node.right, level + 1)
+            self.dfs(node.left, level + 1)
