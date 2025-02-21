@@ -1,22 +1,24 @@
-class Solution:
-    def isIsomorphic(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-        my_dict = {}
+class Solution(object):
+    def isIsomorphic(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        s_to_t_mapping = {}
+        t_to_s_mapping = {}
 
-        for i in range(len(s)):
-            if s[i] not in my_dict.keys():
-                my_dict[s[i]] = t[i]
-            else:
-                if my_dict[s[i]] != t[i]:
+        for s_char, t_char in zip(s, t):
+            if s_char in s_to_t_mapping:
+                if s_to_t_mapping[s_char] != t_char:
                     return False
+            else:
+                s_to_t_mapping[s_char] = t_char
 
-        my_dict = {}
-        for i in range(len(t)):
-            if t[i] not in my_dict.keys():
-                my_dict[t[i]] = s[i]
-            else:
-                if my_dict[t[i]] != s[i]:
+            if t_char in t_to_s_mapping:
+                if t_to_s_mapping[t_char] != s_char:
                     return False
+            else:
+                t_to_s_mapping[t_char] = s_char
 
         return True
