@@ -5,41 +5,19 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    def __init__(self):
+        self.prev = None  # Maintain state across recursive calls
+
     def flatten(self, root: Optional[TreeNode]) -> None:
         """
         Do not return anything, modify root in-place instead.
         """
-        # def preorder_traversal(node):
-        #     if node is None:
-        #         return []
-        #     return [node] + preorder_traversal(node.left) + preorder_traversal(node.right)
-        
-        # # Perform preorder traversal
-        # preorder_nodes = preorder_traversal(root)
-        
-        # # Merge nodes to the right and make left null
-        # for i in range(len(preorder_nodes) - 1):
-        #     preorder_nodes[i].left = None
-        #     preorder_nodes[i].right = preorder_nodes[i + 1]
-        
-
-        ######
         if not root:
-            return []
+            return
 
-        res = []
-        def dfs(root):
-            res.append(root)
-            if root.left:
-                dfs(root.left)
-            if root.right:
-                dfs(root.right)
-        
-        dfs(root)
+        self.flatten(root.right)
+        self.flatten(root.left)
 
-        for i in range(len(res) - 1):
-            res[i].left = None
-            res[i].right = res[i + 1]
-            
-                
-            
+        root.right = self.prev
+        root.left = None
+        self.prev = root
