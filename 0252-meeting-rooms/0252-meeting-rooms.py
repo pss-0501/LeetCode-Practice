@@ -5,7 +5,7 @@ class Solution:
         intervals.sort()
         res = [intervals[0]]
         for start, end in intervals[1:]:
-            if start < res[-1][1] or end < res[-1][0]:
+            if start < res[-1][1]: #or end < res[-1][0]:
                 return False
             res.append([start, end])
         return True
