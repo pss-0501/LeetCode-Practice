@@ -25,6 +25,6 @@ class Solution:
                 while curr.left:
                     curr = curr.left
                 root.val = curr.val
-                root.right = self.deleteNode(root.right, root.val)
+                root.right = self.deleteNode(root.right, curr.val)
 
         return root
