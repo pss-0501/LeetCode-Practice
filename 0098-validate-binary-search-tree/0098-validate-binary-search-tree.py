@@ -6,21 +6,15 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        def dfs_in_order():
-            results = []
-            def traverse(current_node):
-                if current_node.left is not None:
-                    traverse(current_node.left)
-                results.append(current_node.val) 
-                if current_node.right is not None:
-                    traverse(current_node.right)          
-            traverse(root)
-            return results
+        # L < N < R
+        def isValid(node, mini, maxi):
+            if not node:
+                return True
+
+            if (node.val <= mini or node.val >= maxi):
+                return False
+
+            return isValid(node.left, mini, node.val) and isValid(node.right, node.val, maxi)
+
         
-        def is_valid_bst():
-            nodeList = dfs_in_order()
-            for i in range(len(nodeList) - 1):
-                if nodeList[i] >= nodeList[i+1]:
-                    return False
-            return True
-        return is_valid_bst()
+        return isValid(root, float('-inf'), float('inf'))
