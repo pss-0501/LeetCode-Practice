@@ -6,22 +6,21 @@
 #         self.right = right
 class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
-        if len(preorder) == 0:
+        if not preorder:
             return None
+        
         root = TreeNode(preorder[0])
 
-        def insert(node, value):
-                if node.val > value:
-                    if not node.left:
-                        node.left = TreeNode(value)
-                        return
-                    insert(node.left, value)
-                if node.val < value:
-                    if not node.right:
-                        node.right = TreeNode(value)
-                        return
-                    insert(node.right, value)
+        def insert_into_bst(node, val):
+            if not node:
+                return TreeNode(val)
+            if val < node.val:
+                node.left = insert_into_bst(node.left, val)
+            else:
+                node.right = insert_into_bst(node.right, val)
+            return node
+
         for val in preorder[1:]:
-            insert(root, val)
+            insert_into_bst(root, val)
+        
         return root
-    
