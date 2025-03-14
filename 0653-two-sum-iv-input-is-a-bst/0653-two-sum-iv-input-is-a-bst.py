@@ -6,9 +6,6 @@
 #         self.right = right
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
-        # x + y = k
-        # y = k - x
-
         my_set = set()
         def dfs(node):
             if not node:
