@@ -7,7 +7,7 @@ class Solution:
             if i >= len(nums):
                 subset.append(currsets.copy())  # Add a copy of the current subset
                 return
-            
+
             # Decision to include nums[i]
             currsets.append(nums[i])
             helper(i + 1, nums, subset, currsets)
@@ -15,6 +15,6 @@ class Solution:
 
             # Decision to not include nums[i]
             helper(i + 1, nums, subset, currsets)
-        
+
         helper(0, nums, subset, currsets)
         return subset
