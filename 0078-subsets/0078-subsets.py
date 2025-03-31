@@ -1,20 +1,21 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        subset, currsets = [], []
+        res = []
+        currset = []
 
-        def helper(i, nums, subset, currsets):
-            # Correcting the condition to check if we've gone through all elements
-            if i >= len(nums):
-                subset.append(currsets.copy())  # Add a copy of the current subset
+        def recur(index):
+            if index >= len(nums):
+                res.append(currset.copy())
                 return
 
-            # Decision to include nums[i]
-            currsets.append(nums[i])
-            helper(i + 1, nums, subset, currsets)
-            currsets.pop()  # Backtrack to remove the last element added
+            # include
+            currset.append(nums[index])
+            recur(index + 1)
 
-            # Decision to not include nums[i]
-            helper(i + 1, nums, subset, currsets)
+            # dont include
+            currset.pop()
+            recur(index + 1)
 
-        helper(0, nums, subset, currsets)
-        return subset
+        recur(0)
+        return res
+        
