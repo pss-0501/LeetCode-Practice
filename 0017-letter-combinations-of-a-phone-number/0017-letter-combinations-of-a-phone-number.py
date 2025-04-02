@@ -1,12 +1,7 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        if not digits:
-            return []
-
-        ans, sol = [], []
-        
-        # Mapping of digits to letters
-        letter_dict = {
+        res = []
+        digitToChar = {
             '2': 'abc',
             '3': 'def',
             '4': 'ghi',
@@ -17,18 +12,14 @@ class Solution:
             '9': 'wxyz'
         }
 
-        def backtracking(i = 0):
-            # base case
-            if i == len(digits):
-                ans.append("".join(sol))
+        def dfs(i, curr):
+            if len(curr) == len(digits):
+                res.append(curr)
                 return
 
-            key_pressed = letter_dict[digits[i]]
+            for c in digitToChar[digits[i]]:
+                dfs(i + 1, curr + c)
 
-            for letter in key_pressed:
-                sol.append(letter)
-                backtracking(i + 1)
-                sol.pop()
-
-        backtracking(0)
-        return ans
+        if digits:
+            dfs(0, '')
+        return res
